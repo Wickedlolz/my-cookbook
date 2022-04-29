@@ -4,6 +4,7 @@ const routes = require('./routes');
 
 const app = express();
 require('./config/express')(app);
+require('./config/mongoose')();
 app.use(routes);
 
 app.listen(config.PORT, () =>
