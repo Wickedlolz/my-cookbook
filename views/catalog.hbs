@@ -9,14 +9,11 @@
         Page 1 of 1
     </header>
 
-    <a class='card' href=''>
-        <article class='preview'>
-            <div class='title'>
-                <h2>recipe name</h2>
-            </div>
-            <div class='small'><img src='' alt='recipe' /></div>
-        </article>
-    </a>
+    {{#each recipes}}
+        {{> recipeCard}}
+    {{else}}
+        <p style="text-align: center;">No recipes added yet. Be first and <a href="/create">create one!</a></p>
+    {{/each}}
 
     <footer class='section-title'>
         Page 1 of 1
