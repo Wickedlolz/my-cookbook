@@ -3,20 +3,22 @@
         <h2>recipe name</h2>
         <div class='band'>
             <div class='thumb'>
-                <img src='' />
+                <img src='{{recipe.imageUrl}}' />
             </div>
             <div class='ingredients'>
                 <h3>Ingredients:</h3>
                 <ul>
-                    <li>ingredient 1</li>
-                    <li>ingredient 2</li>
+                    {{#each recipe.ingredients}}
+                        <li>{{this}}</li>
+                    {{/each}}
                 </ul>
             </div>
         </div>
         <div class='description'>
             <h3>Preparation:</h3>
-            <p>prep 1</p>
-            <p>prep 2</p>
+            {{#each recipe.steps}}
+                <p>{{this}}</p>
+            {{/each}}
         </div>
         <div class='controls'>
             <a class='actionLink' href=''>✎ Edit</a>
@@ -38,7 +40,6 @@
                     <header>peter@abv.bg</header>
                     <p>content</p>
                 </li>
-
             </ul>
             <div class='section-title'>No comments added yet!</div>
         </div>

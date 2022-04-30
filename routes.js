@@ -10,7 +10,7 @@ const authController = require('./controllers/auth');
 
 router.use('/', homeController);
 router.use('/catalog', catalogController);
-router.use('/details/:id', detailsController);
+router.use('/details', detailsController);
 router.use('/create', createController);
 router.use('/edit/:id', editController);
 router.use('/users', authController);

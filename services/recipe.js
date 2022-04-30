@@ -5,6 +5,11 @@ async function getAll() {
     return recipes;
 }
 
+async function getOneById(id) {
+    const recipe = await Recipe.findById(id).lean();
+    return recipe;
+}
+
 async function create({ name, imageUrl, ingredients, steps }) {
     const recipe = new Recipe({ name, imageUrl, ingredients, steps });
     return await recipe.save();
@@ -12,5 +17,6 @@ async function create({ name, imageUrl, ingredients, steps }) {
 
 module.exports = {
     getAll,
+    getOneById,
     create,
 };
