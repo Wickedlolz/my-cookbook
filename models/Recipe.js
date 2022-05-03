@@ -27,6 +27,9 @@ const recipeSchema = Schema({
             required: true,
         },
     ],
+    createdOn: {
+        type: String,
+    },
 });
 
 const Recipe = model('Recipe', recipeSchema);

@@ -3,7 +3,8 @@ article {
     width: 720px;
     margin: 32px auto 32px auto;
     background-color: #cccccc;
-    box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2), 12px 12px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2),
+        12px 12px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 16px;
 }
 
@@ -20,7 +21,7 @@ article h2 {
 }
 
 .band::after {
-    content: "";
+    content: '';
     clear: both;
     display: table;
 }
@@ -30,21 +31,22 @@ article h2 {
     float: left;
 }
 
-.thumb>img {
+.thumb > img {
     max-width: 200px;
-    box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2), 12px 12px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2),
+        12px 12px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .ingredients {
     float: left;
+    margin-left: 31px;
+}
+
+.ingredients > ul {
     margin-left: 32px;
 }
 
-.ingredients>ul {
-    margin-left: 32px;
-}
-
-.ingredients>ul>li {
+.ingredients > ul > li {
     margin-top: 16px;
 }
 
@@ -52,7 +54,7 @@ article h2 {
     padding: 32px;
 }
 
-.description>p {
+.description > p {
     margin: 16px 0 16px 32px;
 }
 
@@ -61,7 +63,7 @@ article h2 {
 }
 
 .preview::after {
-    content: "";
+    content: '';
     clear: both;
     display: table;
 }
@@ -69,7 +71,8 @@ article h2 {
 .preview:hover {
     background-color: salmon;
     cursor: pointer;
-    box-shadow: 16px 16px 8px 0 rgba(0, 0, 0, 0.2), 20px 20px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 16px 16px 8px 0 rgba(0, 0, 0, 0.2),
+        20px 20px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .title {
@@ -89,12 +92,13 @@ article h2 {
     border-radius: 0 16px 16px 0;
 }
 
-.small>img {
+.small > img {
     max-width: 200px;
     max-height: 150px;
     margin: 16px auto;
     display: block;
-    box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2), 12px 12px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2),
+        12px 12px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .controls {
@@ -116,7 +120,7 @@ article h2 {
 .recent-recipes::after {
     display: table;
     clear: both;
-    content: "";
+    content: '';
 }
 
 .recent-space {
@@ -135,7 +139,8 @@ article h2 {
 
 .recent:hover {
     cursor: pointer;
-    box-shadow: 16px 16px 8px 0 rgba(0, 0, 0, 0.2), 20px 20px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 16px 16px 8px 0 rgba(0, 0, 0, 0.2),
+        20px 20px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: salmon;
 }
 
@@ -145,7 +150,7 @@ article h2 {
     border-radius: 16px 16px 0 0;
 }
 
-.recent-preview>img {
+.recent-preview > img {
     max-width: 200px;
     max-height: 150px;
     margin: 0 auto;
@@ -156,6 +161,7 @@ article h2 {
     padding: 8px 16px;
 }
 
-.card, .card:visited {
+.card,
+.card:visited {
     color: black;
 }

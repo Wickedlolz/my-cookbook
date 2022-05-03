@@ -1,7 +1,11 @@
 <section id='catalog'>
     <div class='section-title'>
-        <form id='searchForm'>
-            <input type='text' name='search' value='' />
+        <form id='searchForm' action="/catalog" method="get">
+            {{#if query}}
+                <input type='text' name='search' value='{{query}}' />
+            {{else}}
+                <input type='text' name='search' value='' />
+            {{/if}}
             <input type='submit' value='Search' />
         </form>
     </div>
