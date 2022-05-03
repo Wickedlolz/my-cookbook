@@ -33,9 +33,23 @@ async function create({ name, imageUrl, ingredients, steps }) {
     return await recipe.save();
 }
 
+async function update(
+    recipeId,
+    { name, imageUrl, ingredients, steps, createdOn }
+) {
+    ingredients = ingredients.split('\r\n');
+    steps = steps.split('\r\n');
+    const updatedRecipe = await Recipe.findByIdAndUpdate(recipeId, {
+        $set: { name, imageUrl, ingredients, steps, createdOn },
+    });
+
+    return updatedRecipe;
+}
+
 module.exports = {
     getAll,
     getOneById,
     getLatest,
     create,
+    update,
 };

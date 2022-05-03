@@ -1,34 +1,34 @@
 <section id='edit'>
     <article>
         <h2>Edit Recipe</h2>
-        <form action='/edit' method='post'>
+        <form action='/edit/{{recipe._id}}' method='post'>
             <label>Name:
                 <input
                     type='text'
                     name='name'
                     placeholder='Recipe name'
-                    value=''
+                    value='{{recipe.name}}'
                 /></label>
             <label>Image:
                 <input
                     type='text'
                     name='img'
                     placeholder='Image URL'
-                    value=''
+                    value='{{recipe.imageUrl}}'
                 /></label>
             <label class='ml'>Ingredients:
                 <textarea
                     name='ingredients'
                     placeholder='Enter ingredients on separate lines'
                     value=''
-                ></textarea>
+                >{{recipe.ingredients}}</textarea>
             </label>
             <label class='ml'>Preparation:
                 <textarea
                     name='steps'
                     placeholder='Enter preparation steps on separate lines'
                     value=''
-                ></textarea>
+                >{{recipe.steps}}</textarea>
             </label>
             <input type='submit' value='Update Recipe' />
         </form>

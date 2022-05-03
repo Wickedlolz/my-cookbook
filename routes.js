@@ -12,7 +12,7 @@ router.use('/', homeController);
 router.use('/catalog', catalogController);
 router.use('/details', detailsController);
 router.use('/create', createController);
-router.use('/edit/:id', editController);
+router.use('/edit', editController);
 router.use('/users', authController);
 
 module.exports = router;
