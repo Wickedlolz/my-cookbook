@@ -11,6 +11,11 @@ async function getAll(query) {
     return recipes;
 }
 
+async function getLatest() {
+    const recipes = await Recipe.find({}).sort('-createdOn').limit(3).lean();
+    return recipes;
+}
+
 async function getOneById(id) {
     const recipe = await Recipe.findById(id).lean();
     return recipe;
@@ -31,5 +36,6 @@ async function create({ name, imageUrl, ingredients, steps }) {
 module.exports = {
     getAll,
     getOneById,
+    getLatest,
     create,
 };

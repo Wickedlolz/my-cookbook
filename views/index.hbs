@@ -4,7 +4,10 @@
     </div>
     <header class='section-title'>Recently added recipes</header>
     <div class='recent-recipes'>
-        <p>Loading&hellip;</p>
+        {{#each latestRecipes}}
+            {{> recentRecipeCard}}
+            <div class='recent-space'></div>
+        {{/each}}
     </div>
     <footer class='section-title'>
         <p>Browse all recipes in the <a href='/catalog'>Catalog</a></p>
