@@ -1,40 +1,24 @@
 const User = require('../models/User');
 
-module.exports = () => {
-    const users = [];
+async function register(username, email, password) {
+    const user = new User({
+        username,
+        email,
+        password,
+    });
 
+    await user.save();
+}
+
+async function login(email, password) {}
+
+module.exports = () => {
     return (req, res, next) => {
         req.auth = {
-            login,
             register,
+            login,
         };
 
         next();
-
-        async function login(email, password) {
-            const user = User.find({ email });
-
-            if (user) {
-                req.session.user = user;
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        function register(username, password) {
-            const user = users.find((u) => u.username == username);
-
-            if (user == undefined) {
-                users.push({
-                    username,
-                    password,
-                });
-
-                return true;
-            } else {
-                return false;
-            }
-        }
     };
 };
