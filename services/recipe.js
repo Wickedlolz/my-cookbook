@@ -34,18 +34,41 @@ async function create({ name, imageUrl, ingredients, steps, author }) {
     return await recipe.save();
 }
 
-async function update(recipeId, { name, imageUrl, ingredients, steps }) {
+async function update(
+    recipeId,
+    { name, imageUrl, ingredients, steps },
+    authorId
+) {
     ingredients = ingredients.split('\r\n');
     steps = steps.split('\r\n');
-    const updatedRecipe = await Recipe.findByIdAndUpdate(recipeId, {
-        $set: { name, imageUrl, ingredients, steps },
-    });
 
-    return updatedRecipe;
+    const recipe = await Recipe.findById(recipeId);
+
+    if (recipe.author != authorId) {
+        return false;
+    }
+
+    recipe.name = name;
+    recipe.imageUrl = imageUrl;
+    recipe.ingredients = ingredients;
+    recipe.steps = steps;
+
+    recipe.save();
+
+    return {
+        id: recipe._id,
+    };
 }
 
-async function deleteById(recipeId) {
-    return await Recipe.findByIdAndDelete(recipeId);
+async function deleteById(recipeId, authorId) {
+    const recipe = await getOneById(recipeId);
+
+    if (recipe.author != authorId) {
+        return false;
+    }
+
+    await Recipe.findByIdAndDelete(recipeId);
+    return true;
 }
 
 module.exports = {

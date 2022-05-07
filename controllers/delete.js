@@ -19,13 +19,12 @@ router.get('/:id', async (req, res) => {
 router.post('/:id', async (req, res) => {
     const recipeId = req.params.id;
 
-    if (recipeId != req.session.user.id) {
-        return res.redirect('/users/login');
-    }
-
     try {
-        await recipeService.deleteById(recipeId);
-        res.redirect('/');
+        if (await recipeService.deleteById(recipeId, req.session.user.id)) {
+            res.redirect('/');
+        } else {
+            res.redirect('/users/login');
+        }
     } catch (error) {
         console.error(error.message);
         res.redirect('/details/' + recipeId);

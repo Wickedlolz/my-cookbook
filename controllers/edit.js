@@ -20,19 +20,23 @@ router.get('/:id', async (req, res) => {
 router.post('/:id', async (req, res) => {
     const recipeId = req.params.id;
 
-    if (recipeId != req.session.user.id) {
-        return res.redirect('/users/login');
-    }
-
     const { name, img, ingredients, steps } = req.body;
-    const updatedRecipe = await recipeService.update(recipeId, {
-        name,
-        imageUrl: img,
-        ingredients,
-        steps,
-    });
+    const updatedRecipe = await recipeService.update(
+        recipeId,
+        {
+            name,
+            imageUrl: img,
+            ingredients,
+            steps,
+        },
+        req.session.user.id
+    );
 
-    res.redirect('/details/' + updatedRecipe._id);
+    if (updatedRecipe) {
+        res.redirect('/details/' + updatedRecipe.id);
+    } else {
+        res.redirect('/users/login');
+    }
 });
 
 module.exports = router;
