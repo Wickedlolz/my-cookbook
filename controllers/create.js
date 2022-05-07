@@ -12,7 +12,13 @@ router.post('/', async (req, res) => {
     ingredients = ingredients.split('\r\n');
     steps = steps.split('\r\n');
 
-    await recipeService.create({ name, imageUrl: img, ingredients, steps });
+    await recipeService.create({
+        name,
+        imageUrl: img,
+        ingredients,
+        steps,
+        author: req.session.id,
+    });
 
     res.redirect('/');
 });

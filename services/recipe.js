@@ -21,7 +21,7 @@ async function getOneById(id) {
     return recipe;
 }
 
-async function create({ name, imageUrl, ingredients, steps }) {
+async function create({ name, imageUrl, ingredients, steps, author }) {
     const createdOn = new Date().toLocaleString();
     const recipe = new Recipe({
         name,
@@ -29,6 +29,7 @@ async function create({ name, imageUrl, ingredients, steps }) {
         ingredients,
         steps,
         createdOn,
+        author,
     });
     return await recipe.save();
 }
