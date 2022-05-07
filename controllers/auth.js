@@ -9,11 +9,11 @@ router.post('/register', async (req, res) => {
     const { username, email, password, rePass } = req.body;
 
     if (username == '' || email == '' || password == '' || rePass == '') {
-        return res.redirect('/register');
+        return res.redirect('/users/register');
     }
 
     if (password != rePass) {
-        return res.redirect('/register');
+        return res.redirect('/users/register');
     }
 
     try {
@@ -21,7 +21,7 @@ router.post('/register', async (req, res) => {
         res.redirect('/');
     } catch (error) {
         console.error(error.message);
-        res.redirect('/register');
+        res.redirect('/users/register');
     }
 });
 
@@ -32,10 +32,16 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    if (await req.auth.login(email, password)) {
+    try {
+        if (email == '' || password == '') {
+            throw new Error('All fields are required!');
+        }
+
+        await req.auth.login(email, password);
         res.redirect('/');
-    } else {
-        res.redirect('/login');
+    } catch (error) {
+        console.error(error.message);
+        res.redirect('/users/login');
     }
 });
 

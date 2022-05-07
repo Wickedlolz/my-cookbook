@@ -1,6 +1,6 @@
 const express = require('express');
 const { engine } = require('express-handlebars');
-const expressSession = require('express-session');
+const session = require('express-session');
 const auth = require('../middlewares/auth');
 
 module.exports = (app) => {
@@ -9,7 +9,7 @@ module.exports = (app) => {
     app.use(express.urlencoded({ extended: true }));
     app.use(express.static('static'));
     app.use(
-        expressSession({
+        session({
             secret: 'mybiggestsupersecret',
             resave: false,
             saveUninitialized: true,
