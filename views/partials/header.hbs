@@ -5,11 +5,13 @@
     <nav>
         <a id='catalogLink' href='/catalog'>Catalog</a>
         <div>
-            <a id='createLink' href='/create'>Create Recipe</a>
-            <a id='logoutBtn' href='javascript:void(0)'>Logout</a>
-
-            <a id='loginLink' href='/users/login'>Login</a>
-            <a id='registerLink' href='/users/register'>Register</a>
+            {{#if hasUser}}
+                <a id='createLink' href='/create'>Create Recipe</a>
+                <a id='logoutBtn' href='/users/logout'>Logout</a>
+            {{else}}
+                <a id='loginLink' href='/users/login'>Login</a>
+                <a id='registerLink' href='/users/register'>Register</a>
+            {{/if}}
         </div>
     </nav>
 </header>

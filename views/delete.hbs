@@ -1,0 +1,40 @@
+<section id='delete'>
+    <article>
+        <h2>Delete Recipe</h2>
+        <form action='/delete/{{recipe._id}}' method='post'>
+            <label>Name:
+                <input
+                    type='text'
+                    name='name'
+                    placeholder='Recipe name'
+                    value='{{recipe.name}}'
+                    disabled
+                /></label>
+            <label>Image:
+                <input
+                    type='text'
+                    name='img'
+                    placeholder='Image URL'
+                    value='{{recipe.imageUrl}}'
+                    disabled
+                /></label>
+            <label class='ml'>Ingredients:
+                <textarea
+                    name='ingredients'
+                    placeholder='Enter ingredients on separate lines'
+                    value=''
+                    disabled
+                >{{recipe.ingredients}}</textarea>
+            </label>
+            <label class='ml'>Preparation:
+                <textarea
+                    name='steps'
+                    placeholder='Enter preparation steps on separate lines'
+                    value=''
+                    disabled
+                >{{recipe.steps}}</textarea>
+            </label>
+            <input type='submit' value='Delete Recipe' />
+        </form>
+    </article>
+</section>

@@ -46,10 +46,15 @@ async function update(
     return updatedRecipe;
 }
 
+async function deleteById(recipeId) {
+    return await Recipe.findByIdAndDelete(recipeId);
+}
+
 module.exports = {
     getAll,
     getOneById,
     getLatest,
     create,
     update,
+    deleteById,
 };
