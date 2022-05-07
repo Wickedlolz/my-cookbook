@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
         imageUrl: img,
         ingredients,
         steps,
-        author: req.session.id,
+        author: req.session.user.id,
     });
 
     res.redirect('/');

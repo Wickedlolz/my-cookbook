@@ -34,14 +34,11 @@ async function create({ name, imageUrl, ingredients, steps, author }) {
     return await recipe.save();
 }
 
-async function update(
-    recipeId,
-    { name, imageUrl, ingredients, steps, createdOn }
-) {
+async function update(recipeId, { name, imageUrl, ingredients, steps }) {
     ingredients = ingredients.split('\r\n');
     steps = steps.split('\r\n');
     const updatedRecipe = await Recipe.findByIdAndUpdate(recipeId, {
-        $set: { name, imageUrl, ingredients, steps, createdOn },
+        $set: { name, imageUrl, ingredients, steps },
     });
 
     return updatedRecipe;

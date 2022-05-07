@@ -5,6 +5,11 @@ const recipeService = require('../services/recipe');
 
 router.get('/:id', async (req, res) => {
     const recipe = await recipeService.getOneById(req.params.id);
+
+    if (recipe.author != req.session.user.id) {
+        return res.redirect('/users/login');
+    }
+
     recipe.ingredients = recipe.ingredients.join('\r\n');
     recipe.steps = recipe.steps.join('\r\n');
 
@@ -13,6 +18,10 @@ router.get('/:id', async (req, res) => {
 
 router.post('/:id', async (req, res) => {
     const recipeId = req.params.id;
+
+    if (recipeId != req.session.user.id) {
+        return res.redirect('/users/login');
+    }
 
     try {
         await recipeService.deleteById(recipeId);
