@@ -20,7 +20,12 @@ router.post('/:id', async (req, res) => {
     const recipeId = req.params.id;
 
     try {
-        if (await recipeService.deleteById(recipeId, req.session.user.id)) {
+        const isDeleted = await recipeService.deleteById(
+            recipeId,
+            req.session.user.id
+        );
+
+        if (isDeleted) {
             res.redirect('/');
         } else {
             res.redirect('/users/login');

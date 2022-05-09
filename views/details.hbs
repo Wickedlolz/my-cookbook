@@ -21,25 +21,28 @@
             {{/each}}
         </div>
         <div class='controls'>
-            <a class='actionLink' href='/edit/{{recipe._id}}'>✎ Edit</a>
-            <a class='actionLink' href='/delete/{{recipe._id}}'>✖ Delete</a>
+            {{#if isOwner}}
+                <a class='actionLink' href='/edit/{{recipe._id}}'>✎ Edit</a>
+                <a class='actionLink' href='/delete/{{recipe._id}}'>✖ Delete</a>
+            {{/if}}
         </div>
     </article>
     <div>
         <div class='section-title'>Comments for Grilled Duck Fillet</div>
+        {{#if isLogged}}
         <article class='new-comment'>
             <h2>New comment</h2>
-            <form id='commentForm'>
+            <form id='commentForm' method='post'>
                 <textarea name='content' placeholder='Type comment'></textarea>
                 <input type='submit' value='Add comment' />
             </form>
         </article>
+        {{/if}}
         <div class='comments'>
             <ul>
-                <li class='comment'>
-                    <header>peter@abv.bg</header>
-                    <p>content</p>
-                </li>
+                {{#each comments}}
+                    {{> comment}}
+                {{/each}}
             </ul>
             <div class='section-title'>No comments added yet!</div>
         </div>
