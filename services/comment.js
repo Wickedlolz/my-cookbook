@@ -9,10 +9,13 @@ async function getCommentsForRecipeById(recipeId) {
 }
 
 async function create(recipeId, authorId, content) {
+    const createdOn = new Date().toLocaleString();
+
     const comment = new Comment({
         recipe: recipeId,
         author: authorId,
         content,
+        createdOn,
     });
 
     return await comment.save();

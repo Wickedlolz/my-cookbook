@@ -6,9 +6,7 @@ const commentService = require('../services/comment');
 
 router.get('/:id', async (req, res) => {
     const recipe = await recipeService.getOneById(req.params.id);
-    const comments = await commentService.getCommentsForRecipeById(
-        req.params.id
-    );
+    let comments = await commentService.getCommentsForRecipeById(req.params.id);
 
     if (req.session.user && req.session.user.id == recipe.author) {
         res.locals.isOwner = true;
@@ -18,7 +16,9 @@ router.get('/:id', async (req, res) => {
         res.locals.isLogged = true;
     }
 
-    res.render('details', { recipe, comments });
+    let date = new Date().toLocaleString();
+
+    res.render('details', { recipe, comments, date });
 });
 
 router.post('/:id', async (req, res) => {

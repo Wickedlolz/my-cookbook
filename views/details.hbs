@@ -30,13 +30,16 @@
     <div>
         <div class='section-title'>Comments for Grilled Duck Fillet</div>
         {{#if isLogged}}
-        <article class='new-comment'>
-            <h2>New comment</h2>
-            <form id='commentForm' method='post'>
-                <textarea name='content' placeholder='Type comment'></textarea>
-                <input type='submit' value='Add comment' />
-            </form>
-        </article>
+            <article class='new-comment'>
+                <h2>New comment</h2>
+                <form id='commentForm' method='post'>
+                    <textarea
+                        name='content'
+                        placeholder='Type comment'
+                    ></textarea>
+                    <input type='submit' value='Add comment' />
+                </form>
+            </article>
         {{/if}}
         <div class='comments'>
             <ul>
