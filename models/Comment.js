@@ -4,10 +4,12 @@ const commentSchema = new Schema({
     recipe: {
         type: Types.ObjectId,
         ref: 'Recipe',
+        required: true,
     },
     author: {
         type: Types.ObjectId,
         ref: 'User',
+        required: true,
     },
     content: {
         type: String,
@@ -15,6 +17,7 @@ const commentSchema = new Schema({
     },
     createdOn: {
         type: String,
+        required: true,
     },
 });
 

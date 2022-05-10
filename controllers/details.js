@@ -26,6 +26,10 @@ router.post('/:id', async (req, res) => {
 
     if (req.session.user) {
         try {
+            if (content == '') {
+                throw new Error('Comment fields are required!');
+            }
+
             await commentService.create(
                 req.params.id,
                 req.session.user.id,
@@ -35,7 +39,7 @@ router.post('/:id', async (req, res) => {
             res.redirect('/details/' + req.params.id);
         } catch (error) {
             console.error(error.message);
-            res.redirect('/');
+            res.redirect('/details/' + req.params.id);
         }
     } else {
         res.redirect('/users/login');

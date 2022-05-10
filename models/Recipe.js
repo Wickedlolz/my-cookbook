@@ -4,6 +4,7 @@ const recipeSchema = new Schema({
     name: {
         type: String,
         required: true,
+        unique: true,
     },
     imageUrl: {
         type: String,

@@ -45,9 +45,10 @@
             <ul>
                 {{#each comments}}
                     {{> comment}}
+                {{else}}
+                    <div class='section-title'>No comments added yet!</div>
                 {{/each}}
             </ul>
-            <div class='section-title'>No comments added yet!</div>
         </div>
     </div>
 </section>

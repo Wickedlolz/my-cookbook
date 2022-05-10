@@ -2,6 +2,7 @@ const Comment = require('../models/Comment');
 
 async function getCommentsForRecipeById(recipeId) {
     const comments = await Comment.find({ recipe: recipeId })
+        .sort('-createdOn')
         .populate('author')
         .lean();
 

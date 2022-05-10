@@ -1,5 +1,6 @@
 * {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+        'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 16pt;
     padding: 0;
     margin: 0;
@@ -11,7 +12,7 @@ body {
     margin: 0 auto 0 auto;
 }
 
-body>header {
+body > header {
     padding: 32px;
     background-color: #cccccc;
     position: relative;
@@ -96,7 +97,8 @@ a.active {
     width: 850px;
     margin: 32px auto 32px auto;
     background-color: #cccccc;
-    box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2), 12px 12px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2),
+        12px 12px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 32px;
 }
 
@@ -105,7 +107,8 @@ a.active {
     width: 850px;
     margin: 32px auto 32px auto;
     background-color: #cccccc;
-    box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2), 12px 12px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2),
+        12px 12px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 16px 32px;
 }
 
@@ -144,11 +147,26 @@ a:visited {
     text-align: center;
 }
 
-#searchForm input[type="text"] {
+#searchForm input[type='text'] {
     position: static;
     text-align: left;
 }
 
-#searchForm input[type="submit"] {
+#searchForm input[type='submit'] {
     display: inline-block;
+}
+
+#notifications {
+    margin: 0 auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+    width: 50%;
+    padding: 0.5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background: rgb(231, 118, 118);
+    color: white;
+    border-radius: 5px;
+    text-decoration: underline;
 }

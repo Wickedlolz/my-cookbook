@@ -5,7 +5,6 @@ const userSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique: true,
     },
     email: {
         type: String,
@@ -16,6 +15,17 @@ const userSchema = new Schema({
         required: true,
     },
 });
+
+userSchema.index(
+    { username: 1 },
+    {
+        unique: true,
+        collation: {
+            locale: 'en',
+            strength: 1,
+        },
+    }
+);
 
 userSchema.methods.comparePassword = async function (password) {
     return await comparePassword(password, this.password);

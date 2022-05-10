@@ -1,4 +1,11 @@
 <section id='login'>
+    {{#if errors}}
+        {{#each errors}}
+            <div id='notifications'>
+                <p id='notification-message'>{{msg}}</p>
+            </div>
+        {{/each}}
+    {{/if}}
     <article>
         <h2>Login</h2>
         <form method='post'>
