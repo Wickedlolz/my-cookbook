@@ -17,8 +17,8 @@ router.post(
         .notEmpty()
         .withMessage('Username is required!')
         .bail()
-        .isLength({ min: 5 })
-        .withMessage('Username must be atleast 5 characters long.')
+        .isLength({ min: 3 })
+        .withMessage('Username must be atleast 3 characters long.')
         .bail()
         .isAlphanumeric()
         .withMessage('Username must contains only letters and digits.'),
@@ -49,6 +49,7 @@ router.post(
             await req.auth.register(username, email, password);
             res.redirect('/');
         } catch (error) {
+            console.log(error);
             const data = { username, email };
             res.render('register', { errors: error, data });
         }
@@ -59,21 +60,34 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
-router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+router.post(
+    '/login',
+    body('email').trim(),
+    body('password').trim(),
+    body('email')
+        .notEmpty()
+        .withMessage('Email is required!')
+        .bail()
+        .isEmail()
+        .withMessage('Invalid email adress!'),
+    body('password').notEmpty().withMessage('Password is required!'),
+    async (req, res) => {
+        const { errors } = validationResult(req);
+        const { email, password } = req.body;
 
-    try {
-        if (email == '' || password == '') {
-            throw new Error('All fields are required!');
+        try {
+            if (errors.length > 0) {
+                throw errors;
+            }
+
+            await req.auth.login(email, password);
+            res.redirect('/');
+        } catch (error) {
+            console.error(error);
+            res.render('login', { errors: error });
         }
-
-        await req.auth.login(email, password);
-        res.redirect('/');
-    } catch (error) {
-        console.error(error.message);
-        res.redirect('/users/login');
     }
-});
+);
 
 router.get('/logout', (req, res) => {
     req.auth.logout();
