@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 
+const mapErrors = require('../util/mapper');
 const { body, validationResult } = require('express-validator');
 
 router.get('/register', (req, res) => {
@@ -49,9 +50,9 @@ router.post(
             await req.auth.register(username, email, password);
             res.redirect('/');
         } catch (error) {
-            console.log(error);
+            const errors = mapErrors(error);
             const data = { username, email };
-            res.render('register', { errors: error, data });
+            res.render('register', { errors, data });
         }
     }
 );
@@ -83,8 +84,9 @@ router.post(
             await req.auth.login(email, password);
             res.redirect('/');
         } catch (error) {
-            console.error(error);
-            res.render('login', { errors: error });
+            const errors = mapErrors(error);
+            const data = { email };
+            res.render('login', { errors, data });
         }
     }
 );

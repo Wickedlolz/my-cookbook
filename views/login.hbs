@@ -9,7 +9,12 @@
     <article>
         <h2>Login</h2>
         <form method='post'>
-            <label>E-mail: <input type='text' name='email' /></label>
+            <label>E-mail:
+                <input
+                    type='text'
+                    name='email'
+                    value='{{data.email}}'
+                /></label>
             <label>Password: <input type='password' name='password' /></label>
             <input type='submit' value='Login' />
         </form>

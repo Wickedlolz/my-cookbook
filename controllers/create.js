@@ -2,6 +2,7 @@ const { Router } = require('express');
 const router = Router();
 
 const { body, validationResult } = require('express-validator');
+const mapErrors = require('../util/mapper');
 const recipeService = require('../services/recipe');
 
 router.get('/', (req, res) => {
@@ -52,8 +53,9 @@ router.post(
 
             res.redirect('/');
         } catch (error) {
+            const errors = mapErrors(error);
             const data = { name, img, ingredients, steps };
-            res.render('create', { errors: error, data });
+            res.render('create', { errors, data });
         }
     }
 );
