@@ -16,18 +16,16 @@ const recipeSchema = new Schema({
             message: (props) => `${props.value} is not valid image url.`,
         },
     },
-    ingredients: [
-        {
-            type: String,
-            required: true,
-        },
-    ],
-    steps: [
-        {
-            type: String,
-            required: true,
-        },
-    ],
+    ingredients: {
+        type: [String],
+        required: true,
+    },
+
+    steps: {
+        type: [String],
+        required: true,
+    },
+
     createdOn: {
         type: String,
     },
@@ -35,12 +33,10 @@ const recipeSchema = new Schema({
         type: Types.ObjectId,
         ref: 'User',
     },
-    comments: [
-        {
-            type: Types.ObjectId,
-            ref: 'Comment',
-        },
-    ],
+    comments: {
+        type: [Types.ObjectId],
+        ref: 'Comment',
+    },
 });
 
 const Recipe = model('Recipe', recipeSchema);
