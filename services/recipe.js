@@ -12,7 +12,10 @@ async function getAll(query) {
 }
 
 async function getLatest() {
-    const recipes = await Recipe.find({}).sort('-createdOn').limit(3).lean();
+    const recipes = await Recipe.find({})
+        .sort({ createdOn: -1 })
+        .limit(3)
+        .lean();
     return recipes;
 }
 
@@ -22,7 +25,7 @@ async function getOneById(id) {
 }
 
 async function create({ name, imageUrl, ingredients, steps, author }) {
-    const createdOn = new Date().toLocaleString();
+    const createdOn = new Date().toDateString();
     const recipe = new Recipe({
         name,
         imageUrl,
