@@ -12,13 +12,11 @@ router.get('/:id', async (req, res) => {
         res.locals.isOwner = true;
     }
 
-    if (req.session.user) {
-        res.locals.isLogged = true;
-    }
+    // if (req.session.user) {
+    //     res.locals.isLogged = true;
+    // }
 
-    let date = new Date().toLocaleString();
-
-    res.render('details', { recipe, comments, date });
+    res.render('details', { recipe, comments });
 });
 
 router.post('/:id', async (req, res) => {
