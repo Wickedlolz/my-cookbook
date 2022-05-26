@@ -3,6 +3,7 @@ const router = Router();
 
 const mapErrors = require('../util/mapper');
 const { body, validationResult } = require('express-validator');
+const { isGuest, isUser } = require('../services/util');
 
 router.get('/register', (req, res) => {
     res.render('register');
@@ -93,6 +94,7 @@ router.post(
 
 router.get('/logout', (req, res) => {
     req.auth.logout();
+    console.log(req.session.user);
     res.redirect('/');
 });
 

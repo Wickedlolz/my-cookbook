@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 
-const { isUser, isGuest } = require('./services/util');
+const { isUser } = require('./services/util');
 
 const homeController = require('./controllers/home');
 const catalogController = require('./controllers/catalog');
@@ -17,6 +17,6 @@ router.use('/details', detailsController);
 router.use('/create', isUser(), createController);
 router.use('/edit', isUser(), editController);
 router.use('/delete', isUser(), deleteController);
-router.use('/users', isGuest(), authController);
+router.use('/users', authController);
 
 module.exports = router;
