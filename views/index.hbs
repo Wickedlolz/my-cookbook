@@ -7,6 +7,8 @@
         {{#each latestRecipes}}
             {{> recentRecipeCard}}
             <div class='recent-space'></div>
+        {{else}}
+            <p style="text-align: center;">No recipes added yet. Be first and <a href="/create">create one!</a></p>
         {{/each}}
     </div>
     <footer class='section-title'>
