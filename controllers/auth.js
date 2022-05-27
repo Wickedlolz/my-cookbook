@@ -5,12 +5,13 @@ const mapErrors = require('../util/mapper');
 const { body, validationResult } = require('express-validator');
 const { isGuest, isUser } = require('../services/util');
 
-router.get('/register', (req, res) => {
+router.get('/register', isGuest(), (req, res) => {
     res.render('register');
 });
 
 router.post(
     '/register',
+    isGuest(),
     body('username').trim(),
     body('email').trim(),
     body('password').trim(),
@@ -58,12 +59,13 @@ router.post(
     }
 );
 
-router.get('/login', (req, res) => {
+router.get('/login', isGuest(), (req, res) => {
     res.render('login');
 });
 
 router.post(
     '/login',
+    isGuest(),
     body('email').trim(),
     body('password').trim(),
     body('email')
@@ -92,9 +94,8 @@ router.post(
     }
 );
 
-router.get('/logout', (req, res) => {
+router.get('/logout', isUser(), (req, res) => {
     req.auth.logout();
-    console.log(req.session.user);
     res.redirect('/');
 });
 
