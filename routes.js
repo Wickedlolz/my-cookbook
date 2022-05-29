@@ -18,5 +18,5 @@ router.use('/create', isUser(), createController);
 router.use('/edit', isUser(), editController);
 router.use('/delete', isUser(), deleteController);
 router.use('/users', authController);
-// TODO: Set Guard for /users
+
 module.exports = router;
