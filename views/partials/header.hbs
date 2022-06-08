@@ -3,10 +3,10 @@
         <a href='/'><img src='/assets/logo.png' />My Cookbook</a>
     </h1>
     <nav>
-        <a id='catalogLink' href='/catalog'>Catalog</a>
+        <a id='catalogLink' href='/recipes'>Catalog</a>
         <div>
             {{#if hasUser}}
-                <a id='createLink' href='/create'>Create Recipe</a>
+                <a id='createLink' href='/recipes/create'>Create Recipe</a>
                 <a id='logoutBtn' href='/users/logout'>Logout</a>
             {{else}}
                 <a id='loginLink' href='/users/login'>Login</a>
