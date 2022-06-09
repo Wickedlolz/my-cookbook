@@ -121,27 +121,62 @@ router.get('/edit/:id', async (req, res) => {
     res.render('edit', { recipe });
 });
 
-router.post('/edit/:id', async (req, res) => {
-    const recipeId = req.params.id;
+router.post(
+    '/edit/:id',
+    body('name').trim(),
+    body('img').trim(),
+    body('ingredients').trim(),
+    body('steps').trim(),
+    body('name')
+        .notEmpty()
+        .withMessage('Recipe name is required!')
+        .bail()
+        .isLength({ min: 3 })
+        .withMessage('Recipe name must be at least 3 characters long!'),
+    body('img')
+        .notEmpty()
+        .withMessage('Image URL is required!')
+        .bail()
+        .custom(
+            (value, { req }) =>
+                value.startsWith('http') || value.startsWith('https')
+        )
+        .withMessage('Invalid Image URL'),
+    body('ingredients').notEmpty().withMessage('Ingredients is required!'),
+    body('steps').notEmpty().withMessage('Steps is required!'),
+    async (req, res) => {
+        const { errors } = validationResult(req);
+        const recipeId = req.params.id;
+        const { name, img, ingredients, steps } = req.body;
 
-    const { name, img, ingredients, steps } = req.body;
-    const updatedRecipe = await recipeService.update(
-        recipeId,
-        {
-            name,
-            imageUrl: img,
-            ingredients,
-            steps,
-        },
-        req.session.user.id
-    );
+        try {
+            if (errors.length > 0) {
+                throw errors;
+            }
 
-    if (updatedRecipe) {
-        res.redirect('/recipes/details/' + updatedRecipe.id);
-    } else {
-        res.redirect('/users/login');
+            const updatedRecipe = await recipeService.update(
+                recipeId,
+                {
+                    name,
+                    imageUrl: img,
+                    ingredients,
+                    steps,
+                },
+                req.session.user.id
+            );
+
+            if (updatedRecipe) {
+                res.redirect('/recipes/details/' + updatedRecipe.id);
+            } else {
+                res.redirect('/users/login');
+            }
+        } catch (error) {
+            const errors = mapErrors(errors);
+            const data = { name, img, ingredients, steps };
+            res.render('edit', { errors, data });
+        }
     }
-});
+);
 
 router.get('/delete/:id', async (req, res) => {
     const recipe = await recipeService.getOneById(req.params.id);
