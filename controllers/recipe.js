@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const recipeService = require('../services/recipe');
 const commentService = require('../services/comment');
+const { isUser, isCreator } = require('../middlewares/guards');
 
 const { body, validationResult } = require('express-validator');
 const mapErrors = require('../util/mapper');
@@ -27,7 +28,7 @@ router.get('/details/:id', async (req, res) => {
     res.render('details', { recipe, comments });
 });
 
-router.post('/details/:id', async (req, res) => {
+router.post('/details/:id', isUser(), async (req, res) => {
     const content = req.body.content;
 
     if (req.session.user) {
@@ -52,12 +53,13 @@ router.post('/details/:id', async (req, res) => {
     }
 });
 
-router.get('/create', (req, res) => {
+router.get('/create', isUser(), (req, res) => {
     res.render('create');
 });
 
 router.post(
     '/create',
+    isUser(),
     body('name').trim(),
     body('img').trim(),
     body('ingredients').trim(),
@@ -107,7 +109,7 @@ router.post(
     }
 );
 
-router.get('/edit/:id', async (req, res) => {
+router.get('/edit/:id', isUser(), isCreator(), async (req, res) => {
     const recipeId = req.params.id;
     const recipe = await recipeService.getOneById(recipeId);
 
@@ -123,6 +125,8 @@ router.get('/edit/:id', async (req, res) => {
 
 router.post(
     '/edit/:id',
+    isUser(),
+    isCreator(),
     body('name').trim(),
     body('img').trim(),
     body('ingredients').trim(),
@@ -178,7 +182,7 @@ router.post(
     }
 );
 
-router.get('/delete/:id', async (req, res) => {
+router.get('/delete/:id', isUser(), isCreator(), async (req, res) => {
     const recipe = await recipeService.getOneById(req.params.id);
 
     if (recipe.author != req.session.user.id) {
@@ -191,7 +195,7 @@ router.get('/delete/:id', async (req, res) => {
     res.render('delete', { recipe });
 });
 
-router.post('/delete/:id', async (req, res) => {
+router.post('/delete/:id', isUser(), isCreator(), async (req, res) => {
     const recipeId = req.params.id;
 
     try {

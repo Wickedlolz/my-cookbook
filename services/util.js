@@ -9,29 +9,7 @@ async function comparePassword(password, hashedPassword) {
     return bcrypt.compare(password, hashedPassword);
 }
 
-function isUser() {
-    return (req, res, next) => {
-        if (req.session.user) {
-            next();
-        } else {
-            res.redirect('/users/login');
-        }
-    };
-}
-
-function isGuest() {
-    return (req, res, next) => {
-        if (req.session.user) {
-            res.redirect('/');
-        } else {
-            next();
-        }
-    };
-}
-
 module.exports = {
     hashPassword,
     comparePassword,
-    isUser,
-    isGuest,
 };
