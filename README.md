@@ -38,4 +38,4 @@ Using <a href="https://github.com/Wickedlolz/cookbook">cookbook</a> idea but rew
 
 ## TODO:
 
--   **Implement pagination**
+-   [ ] **Implement pagination**
