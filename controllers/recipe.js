@@ -14,18 +14,20 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/details/:id', async (req, res) => {
-    const recipe = await recipeService.getOneById(req.params.id);
-    let comments = await commentService.getCommentsForRecipeById(req.params.id);
+    const recipeId = req.params.id;
 
-    if (req.session.user && req.session.user.id == recipe.author) {
-        res.locals.isOwner = true;
+    try {
+        const recipe = await recipeService.getOneById(recipeId);
+        let comments = await commentService.getCommentsForRecipeById(recipeId);
+
+        if (req.session.user && req.session.user.id == recipe.author) {
+            res.locals.isOwner = true;
+        }
+
+        res.render('details', { recipe, comments });
+    } catch (error) {
+        res.redirect('/');
     }
-
-    // if (req.session.user) {
-    //     res.locals.isLogged = true;
-    // }
-
-    res.render('details', { recipe, comments });
 });
 
 router.post('/details/:id', isUser(), async (req, res) => {
