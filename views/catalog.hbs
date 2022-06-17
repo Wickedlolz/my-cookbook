@@ -1,8 +1,8 @@
 <section id='catalog'>
     <div class='section-title'>
         <form id='searchForm' action="/catalog" method="get">
-            {{#if query}}
-                <input type='text' name='search' value='{{query}}' />
+            {{#if query.search}}
+                <input type='text' name='search' value='{{query.search}}' />
             {{else}}
                 <input type='text' name='search' value='' />
             {{/if}}
@@ -10,7 +10,9 @@
         </form>
     </div>
     <header class='section-title'>
-        Page 1 of 1
+        <a href="?page={{query.startIndex}}">&lt; Prev</a>
+        Page 1 of {{totalResults}}
+        <a href="?page={{query.startIndex}}">Next &gt;</a>
     </header>
 
     {{#each recipes}}
@@ -20,6 +22,8 @@
     {{/each}}
 
     <footer class='section-title'>
-        Page 1 of 1
+        <a href="?page={{query.startIndex}}">&lt; Prev</a>
+        Page 1 of {{totalResults}}
+        <a href="?page={{query.startIndex}}">Next &gt;</a>
     </footer>
 </section>

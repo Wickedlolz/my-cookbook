@@ -1,14 +1,21 @@
 const Recipe = require('../models/Recipe');
 
-async function getAll(query) {
+function getAll(query) {
     const options = {};
+    const startIndex = Number(query.startIndex) || 0;
+    const limit = Number(query.limit) || Number.MAX_SAFE_INTEGER;
 
     if (query && query.search) {
         options.name = new RegExp(query.search.toLocaleLowerCase(), 'i');
     }
 
-    const recipes = await Recipe.find(options).lean();
-    return recipes;
+    // const recipes = await Recipe.find(options).skip(startIndex).limit(limit).lean();
+    // return recipes;
+
+    return Promise.all([
+        Recipe.find(options).skip(startIndex).limit(limit).lean(),
+        Recipe.find(options).countDocuments(),
+    ]);
 }
 
 async function getLatest() {

@@ -8,9 +8,9 @@ const { body, validationResult } = require('express-validator');
 const mapErrors = require('../util/mapper');
 
 router.get('/', async (req, res) => {
-    const recipes = await recipeService.getAll(req.query);
+    const [recipes, totalResults] = await recipeService.getAll(req.query);
 
-    res.render('catalog', { recipes, query: req.query.search });
+    res.render('catalog', { recipes, query: req.query, totalResults });
 });
 
 router.get('/details/:id', async (req, res) => {
