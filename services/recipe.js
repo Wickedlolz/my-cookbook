@@ -20,7 +20,7 @@ function getAll(query) {
 
 async function getLatest() {
     const recipes = await Recipe.find({})
-        .sort({ createdOn: -1 })
+        .sort({ createdAt: -1 })
         .limit(3)
         .lean();
     return recipes;
