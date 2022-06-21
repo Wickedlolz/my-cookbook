@@ -23,7 +23,7 @@ exports.isGuest = function () {
 exports.isCreator = function () {
     return async (req, res, next) => {
         const recipe = await getOneById(req.params.id);
-        if (recipe.author == res.locals.user._id) {
+        if (recipe.author == req.session.user.id) {
             next();
         } else {
             res.redirect('/');

@@ -111,7 +111,7 @@ router.post(
     }
 );
 
-router.get('/edit/:id', isUser(), isCreator(), async (req, res) => {
+router.get('/edit/:id', isCreator(), async (req, res) => {
     const recipeId = req.params.id;
     const recipe = await recipeService.getOneById(recipeId);
 
