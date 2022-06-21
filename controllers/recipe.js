@@ -127,7 +127,6 @@ router.get('/edit/:id', isUser(), isCreator(), async (req, res) => {
 
 router.post(
     '/edit/:id',
-    isUser(),
     isCreator(),
     body('name').trim(),
     body('img').trim(),
@@ -184,7 +183,7 @@ router.post(
     }
 );
 
-router.get('/delete/:id', isUser(), isCreator(), async (req, res) => {
+router.get('/delete/:id', isCreator(), async (req, res) => {
     const recipe = await recipeService.getOneById(req.params.id);
 
     if (recipe.author != req.session.user.id) {
